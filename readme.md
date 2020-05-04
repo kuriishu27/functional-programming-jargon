@@ -177,32 +177,32 @@ add2(10) // 12
 
 ```
 
-## Auto Currying
-Transforming a function that takes multiple arguments into one that if given less than its correct number of arguments returns a function that takes the rest. When the function gets the correct number of arguments it is then evaluated.
-
-lodash & Ramda have a `curry` function that works this way.
-
-```js
-const add = (x, y) => x + y
-
-const curriedAdd = _.curry(add)
-curriedAdd(1, 2) // 3
-curriedAdd(1) // (y) => 1 + y
-curriedAdd(1)(2) // 3
-```
-
-__Further reading__
-* [Favoring Curry](http://fr.umio.us/favoring-curry/)
-* [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
-
 ## Function Composition
 
 The act of putting two functions together to form a third function where the output of one function is the input of the other.
 
-```js
-const compose = (f, g) => (a) => f(g(a)) // Definition
-const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
-floorAndToString(121.212121) // '121'
+```swift
+func compose<A, B, C>(_ f: @escaping (B) -> C,
+                      _ g: @escaping (A) -> B) -> (A) -> C {
+
+    return { a in
+        f(g(a))
+    }
+}
+// Definition
+// compose: <A, B, C>(_ f: (B) -> C, _ g: (A) -> B) -> (A) -> C
+
+let doubleToString: (Double) -> String = { x in x.description }
+
+let round = { (d: Double) -> Double in
+    return d.rounded()
+}
+
+let floorAndToString = compose(doubleToString, round) // Usage
+// floorAndToString: (Double) -> String
+
+floorAndToString(121.212121) // "121.0"
+// String = 121.0
 ```
 
 ## Continuation
