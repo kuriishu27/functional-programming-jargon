@@ -349,10 +349,12 @@ Points-free function definitions look just like normal assignments without `func
 ## Predicate
 A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
 
-```js
-const predicate = (a) => a > 2
+```swift
+let predicate = { (a: Int) in a > 2 }
+// predicate: (Int) -> Boolean
 
-;[1, 2, 3, 4].filter(predicate) // [3, 4]
+[1, 2, 3, 4].filter(predicate)
+// [Int] = [3, 4]
 ```
 
 ## Contracts
