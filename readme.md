@@ -87,16 +87,19 @@ let sum = { (a: Int, b: Int) -> Int in a + b }
 
 A function which takes a function as an argument and/or returns a function.
 
-```js
-const filter = (predicate, xs) => xs.filter(predicate)
+```swift
+let filter = { (predicate: @escaping (Int) -> Bool, xs: [Int]) -> [Int] in
+    xs.filter(predicate)
+}
 ```
 
-```js
-const is = (type) => (x) => Object(x) instanceof type
+```swift
+let isEven: (Int) -> Bool = { a in a % 2 == 0 }
 ```
 
-```js
-filter(is(Number), [0, '1', 2, null]) // [0, 2]
+```swift
+filter(isEven, [1, 2, 3, 4, 5])
+// [2, 4]
 ```
 
 ## Closure
