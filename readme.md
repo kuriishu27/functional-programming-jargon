@@ -443,17 +443,17 @@ Optional<Int>.none
 
 A variable that cannot be reassigned once defined.
 
-```js
-const five = 5
-const john = Object.freeze({name: 'John', age: 30})
+```swift
+let five = 5
+let john = Person(name: "John", age: 30)
 ```
 
 Constants are [referentially transparent](#referential-transparency). That is, they can be replaced with the values that they represent without affecting the result.
 
 With the above two constants the following expression will always return `true`.
 
-```js
-john.age + five === ({name: 'John', age: 30}).age + (5)
+```swift
+john.age + five == Person(name: "John", age: 30).age + (5)
 ```
 
 ## Functor
