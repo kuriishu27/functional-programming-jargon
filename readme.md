@@ -291,12 +291,12 @@ greeting
 
 A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
 
-```js
-const differentEveryTime = new Date()
+```swift
+let differentEveryTime = Date()
 ```
 
-```js
-console.log('IO is a side effect!')
+```swift
+print("IO is a side effect!")
 ```
 
 ## Idempotent
