@@ -209,11 +209,11 @@ floorAndToString(121.212121) // "121.0"
 
 At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
 
-```js
-const printAsString = (num) => console.log(`Given ${num}`)
+```swift
+let printAsString =  { (num: Int) in print("Given \(num)") }
 
-const addOneAndContinue = (num, cc) => {
-  const result = num + 1
+let addOneAndContinue = { (num: Int, cc: (Int) -> Void) in
+  let result = num + 1
   cc(result)
 }
 
@@ -222,18 +222,24 @@ addOneAndContinue(2, printAsString) // 'Given 3'
 
 Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
 
-```js
-const continueProgramWith = (data) => {
+```swift
+func continueProgramWith(_ data: Data) {
   // Continues program with data
 }
 
-readFileAsync('path/to/file', (err, response) => {
-  if (err) {
-    // handle error
-    return
-  }
-  continueProgramWith(response)
-})
+func readFileAsync(_ file: String,
+                   completion: @escaping (Result<Data, Error>) -> Void) {}
+
+readFileAsync("path/to/file") { response in
+    do {
+        let data = try response.get()
+
+        continueProgramWith(data)
+
+    } catch let error {
+        // handle error
+    }
+}
 ```
 
 ## Purity
