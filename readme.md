@@ -416,12 +416,27 @@ __Further reading__
 
 Anything that can be assigned to a variable.
 
-```js
+```swift
+struct Person {
+    let name: String
+    let age: Int
+}
+// defined struct Person
+
 5
-Object.freeze({name: 'John', age: 30}) // The `freeze` function enforces immutability.
-;(a) => a
-;[1]
-undefined
+// Int = 5
+
+Person(name: "John", age: 30)
+// Person = Person(name: "John", age: 30)
+
+func f<T, U>(_ : (T) -> U) {}
+// (T) -> U
+
+[1]
+// [Int] = [1]
+
+Optional<Int>.none
+// nil
 ```
 
 ## Constant
