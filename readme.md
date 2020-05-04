@@ -159,16 +159,21 @@ The process of converting a function that takes multiple arguments into a functi
 
 Each time the function is called it only accepts one argument and returns a function that takes one argument until all arguments are passed.
 
-```js
-const sum = (a, b) => a + b
+```swift
+let sum = { (a: Int, b: Int) -> Int in a + b }
+// sum: (Int, Int) => Int
 
-const curriedSum = (a) => (b) => a + b
+let curriedSum: (Int) -> (Int) -> Int = { a in { b in a + b } }
+// curriedSum: (Int) -> (Int) -> Int
 
 curriedSum(40)(2) // 42.
+// Int = 42
 
-const add2 = curriedSum(2) // (b) => 2 + b
+let add2 = curriedSum(2) // (b) => 2 + b
+// (Int) -> Int
 
 add2(10) // 12
+// Int = 12
 
 ```
 
