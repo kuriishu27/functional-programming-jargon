@@ -247,33 +247,42 @@ readFileAsync("path/to/file") { response in
 A function is pure if the return value is only determined by its
 input values, and does not produce side effects.
 
-```js
-const greet = (name) => `Hi, ${name}`
+```swift
+let greet = { (name: String) in "Hi, \(name)" }
+// greet: (String) -> String
 
-greet('Brianne') // 'Hi, Brianne'
+greet("Brianne")
+// String = Hi, Brianne
 ```
 
 As opposed to each of the following:
 
-```js
-window.name = 'Brianne'
+```swift
+var name = "Brianne"
+// name: String = Brianne
 
-const greet = () => `Hi, ${window.name}`
+let greet = { "Hi, \(name)" }
+// greet: () -> String
 
-greet() // "Hi, Brianne"
+greet()
+// String = Hi, Brianne
 ```
 
 The above example's output is based on data stored outside of the function...
 
-```js
-let greeting
+```swift
+var greeting: String = ""
+// greeting: String = null
 
-const greet = (name) => {
-  greeting = `Hi, ${name}`
+let greet = { (name: String) in
+    greeting = "Hi, \(name)"
 }
+// greet: String -> Void
 
-greet('Brianne')
-greeting // "Hi, Brianne"
+greet("Brianne")
+
+greeting
+// String = Hi, Brianne
 ```
 
 ... and this one modifies state outside of the function.
