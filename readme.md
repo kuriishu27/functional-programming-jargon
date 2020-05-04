@@ -323,18 +323,23 @@ sort(sort(sort([2, 1])))
 
 Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
 
-```js
+```swift
 // Given
-const map = (fn) => (list) => list.map(fn)
-const add = (a) => (b) => a + b
+func map<A, B>(_ fn: @escaping (A) -> B) -> ([A]) -> [B] {
+    { list in
+        { list.map(fn) }()
+    }
+}
+let add: (Int) -> (Int) -> Int = { a in { b in a + b } }
 
 // Then
 
 // Not points-free - `numbers` is an explicit argument
-const incrementAll = (numbers) => map(add(1))(numbers)
+let incrementAll = { (numbers: [Int]) in map(add(1))(numbers) }
 
 // Points-free - The list is an implicit argument
-const incrementAll2 = map(add(1))
+let incrementAll2 = map(add(1))
+
 ```
 
 `incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
