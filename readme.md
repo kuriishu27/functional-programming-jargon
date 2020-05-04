@@ -137,28 +137,17 @@ __Further reading/Sources__
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
 
-```js
-// Helper to create partially applied functions
-// Takes a function and some arguments
-const partial = (f, ...args) =>
-  // returns a function that takes the rest of the arguments
-  (...moreArgs) =>
-    // and calls the original function with all of them
-    f(...args, ...moreArgs)
-
+```swift
 // Something to apply
-const add3 = (a, b, c) => a + b + c
+let add3: (Int) -> (Int) -> (Int) -> Int = { a in { b in { c in a + b + c } } }
+// add3: (Int) -> (Int) -> (Int) -> Int
 
 // Partially applying `2` and `3` to `add3` gives you a one-argument function
-const fivePlus = partial(add3, 2, 3) // (c) => 2 + 3 + c
+let fivePlus = add3(2)(3) // (c) => 2 + 3 + c
+// fivePlus: Int -> Int
 
-fivePlus(4) // 9
-```
-
-You can also use `Function.prototype.bind` to partially apply a function in JS:
-
-```js
-const add1More = add3.bind(null, 2, 3) // (c) => 2 + 3 + c
+fivePlus(4)
+// Int = 9
 ```
 
 Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
