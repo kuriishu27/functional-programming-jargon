@@ -361,17 +361,32 @@ let predicate = { (a: Int) in a > 2 }
 
 A contract specifies the obligations and guarantees of the behavior from a function or expression at runtime. This acts as a set of rules that are expected from the input and output of a function or expression, and errors are generally reported whenever a contract is violated.
 
-```js
-// Define our contract : int -> boolean
-const contract = (input) => {
-  if (typeof input === 'number') return true
-  throw new Error('Contract violated: expected int -> boolean')
+```swift
+enum ValueTypeError: Error {
+    case invalid(message: String)
 }
 
-const addOne = (num) => contract(num) && num + 1
+// Define our contract : (Int) -> Bool
+func contract<T>(_ input: T) throws -> Bool {
+    if let _ = input as? Int {
+        return true
+    } else {
+        throw ValueTypeError.invalid(message: "Contract violated: expected int -> boolean")
+    }
+}
+
+func addOne<T>(_ num: T) {
+    do {
+        let isValid = try contract(num)
+        isValid ? (num as! Int) + 1 : 0
+    } catch let error {
+        print(error.localizedDescription)
+    }
+}
 
 addOne(2) // 3
-addOne('some string') // Contract violated: expected int -> boolean
+addOne("") // Contract violated: expected (Int) -> Bool
+
 ```
 
 ## Category
