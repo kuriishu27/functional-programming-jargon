@@ -111,10 +111,10 @@ A closure is a scope which captures local variables of a function for access eve
 ie. they allow referencing a scope after the block in which the variables were declared has finished executing.
 
 
-```js
-const addTo = x => y => x + y;
-var addToFive = addTo(5);
-addToFive(3); //returns 8
+```swift
+let addTo: (Int) -> (Int) -> Int = { x in { y in x + y } }
+let addToFive = addTo(5)
+addToFive(3) //returns 8
 ```
 The function ```addTo()``` returns a function(internally called ```add()```), lets store it in a variable called ```addToFive``` with a curried call having parameter 5.
 
