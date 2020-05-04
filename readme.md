@@ -473,20 +473,20 @@ object.map(compose(f, g)) ≍ object.map(g).map(f)
 
 (`f`, `g` are arbitrary functions)
 
-A common functor in JavaScript is `Array` since it abides to the two functor rules:
+A common functor in Swift is `Array` since it abides to the two functor rules:
 
-```js
-;[1, 2, 3].map(x => x) // = [1, 2, 3]
+```swift
+[1, 2, 3].map({ $0 })
 ```
 
 and
 
-```js
-const f = x => x + 1
-const g = x => x * 2
+```swift
+let f = { (x: Int) in x + 1 }
+let g = { (x: Int) in x * 2 }
 
-;[1, 2, 3].map(x => f(g(x))) // = [3, 5, 7]
-;[1, 2, 3].map(g).map(f)     // = [3, 5, 7]
+[1, 2, 3].map({ f(g($0)) }) // = [3, 5, 7]
+[1, 2, 3].map(g).map(f)     // = [3, 5, 7]
 ```
 
 ## Pointed Functor
