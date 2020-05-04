@@ -307,11 +307,15 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 f(f(x)) ≍ f(x)
 ```
 
-```js
-Math.abs(Math.abs(10))
+```swift
+abs(abs(3))
 ```
 
-```js
+```swift
+func sort<T: Comparable>(_ array: [T]) -> [T] {
+    array.sorted()
+}
+
 sort(sort(sort([2, 1])))
 ```
 
